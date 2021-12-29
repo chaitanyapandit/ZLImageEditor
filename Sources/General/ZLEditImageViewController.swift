@@ -201,13 +201,15 @@ public class ZLEditImageViewController: UIViewController {
     var saturation: Float
     
     var panGes: UIPanGestureRecognizer!
-    
+        
     var imageSize: CGSize {
         if self.angle == -90 || self.angle == -270 {
             return CGSize(width: self.originalImage.size.height, height: self.originalImage.size.width)
         }
         return self.originalImage.size
     }
+    
+    @objc public var cancelBlock: (() -> Void)?
     
     @objc public var editFinishBlock: ( (UIImage, ZLEditImageModel) -> Void )?
     
@@ -223,11 +225,16 @@ public class ZLEditImageViewController: UIViewController {
         zl_debugPrint("ZLEditImageViewController deinit")
     }
     
-    @objc public class func editImageVC(animate: Bool = true, image: UIImage, editModel: ZLEditImageModel? = nil, completion: ((UIImage, ZLEditImageModel) -> Void)?) -> ZLEditImageViewController {
+    @objc public class func editImageVC(animate: Bool = true,
+                                        image: UIImage,
+                                        editModel: ZLEditImageModel? = nil,
+                                        completion: ((UIImage, ZLEditImageModel) -> Void)?,
+                                        cancelHandler: (() -> Void)? = nil) -> ZLEditImageViewController {
         let vc = ZLEditImageViewController(image: image, editModel: editModel)
         vc.editFinishBlock = { (ei, editImageModel) in
             completion?(ei, editImageModel)
         }
+        vc.cancelBlock = cancelHandler
         vc.animateDismiss = animate
         return vc
     }
@@ -673,6 +680,7 @@ public class ZLEditImageViewController: UIViewController {
     }
     
     @objc func cancelBtnClick() {
+        self.cancelBlock?()
         self.dismiss(animated: self.animateDismiss, completion: nil)
     }
     
