@@ -223,6 +223,15 @@ public class ZLEditImageViewController: UIViewController {
         zl_debugPrint("ZLEditImageViewController deinit")
     }
     
+    @objc public class func editImageVC(animate: Bool = true, image: UIImage, editModel: ZLEditImageModel? = nil, completion: ((UIImage, ZLEditImageModel) -> Void)?) -> ZLEditImageViewController {
+        let vc = ZLEditImageViewController(image: image, editModel: editModel)
+        vc.editFinishBlock = { (ei, editImageModel) in
+            completion?(ei, editImageModel)
+        }
+        vc.animateDismiss = animate
+        return vc
+    }
+
     @objc public class func showEditImageVC(parentVC: UIViewController?, animate: Bool = true, image: UIImage, editModel: ZLEditImageModel? = nil, completion: ( (UIImage, ZLEditImageModel) -> Void )? ) {
         let tools = ZLImageEditorConfiguration.default().tools
         if ZLImageEditorConfiguration.default().showClipDirectlyIfOnlyHasClipTool, tools.count == 1, tools.contains(.clip) {
