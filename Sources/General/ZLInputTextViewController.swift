@@ -110,17 +110,8 @@ class ZLInputTextViewController: UIViewController {
     }
     
     func setupUI() {
-        self.view.backgroundColor = .black
-        
-        let bgImageView = UIImageView(image: image?.blurImage(level: 4))
-        bgImageView.frame = self.view.bounds
-        bgImageView.contentMode = .scaleAspectFit
-        self.view.addSubview(bgImageView)
-        
-        let coverView = UIView(frame: bgImageView.bounds)
-        coverView.backgroundColor = .black
-        coverView.alpha = 0.4
-        bgImageView.addSubview(coverView)
+                
+        self.view.backgroundColor = .clear
         
         self.cancelBtn = UIButton(type: .custom)
         self.cancelBtn.setTitle(localLanguageTextValue(.cancel), for: .normal)
@@ -179,7 +170,6 @@ class ZLInputTextViewController: UIViewController {
             self.collectionView.frame = CGRect(x: 0, y: self.view.frame.height - keyboardH - ZLInputTextViewController.collectionViewHeight, width: self.view.frame.width, height: ZLInputTextViewController.collectionViewHeight)
         }
     }
-    
 }
 
 

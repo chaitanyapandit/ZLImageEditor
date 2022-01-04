@@ -1007,12 +1007,17 @@ public class ZLEditImageViewController: UIViewController {
         r.size.height *= scale
         let bgImage = self.buildImage().clipImage(self.angle, self.editRect)?.clipImage(0, r)
         let vc = ZLInputTextViewController(image: bgImage, text: text, textColor: textColor, bgColor: bgColor)
-        
+        self.cancelBtn.alpha = 0
+        self.stickersContainer.alpha = 0
         vc.endInput = { (text, textColor, bgColor) in
             completion(text, textColor, bgColor)
+            UIView.animate(withDuration: 0.2) {
+                self.stickersContainer.alpha = 1
+                self.cancelBtn.alpha = 1
+            }
         }
         
-        vc.modalPresentationStyle = .fullScreen
+        vc.modalPresentationStyle = .overCurrentContext
         self.showDetailViewController(vc, sender: nil)
     }
     

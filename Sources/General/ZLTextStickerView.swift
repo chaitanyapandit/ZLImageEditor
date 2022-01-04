@@ -442,7 +442,7 @@ public class ZLTextStickerState: NSObject {
     let gesRotation: CGFloat
     let totalTranslationPoint: CGPoint
     
-    init(text: String, textColor: UIColor, bgColor: UIColor, originScale: CGFloat, originAngle: CGFloat, originFrame: CGRect, gesScale: CGFloat, gesRotation: CGFloat, totalTranslationPoint: CGPoint) {
+    public init(text: String, textColor: UIColor, bgColor: UIColor, originScale: CGFloat, originAngle: CGFloat, originFrame: CGRect, gesScale: CGFloat, gesRotation: CGFloat, totalTranslationPoint: CGPoint) {
         self.text = text
         self.textColor = textColor
         self.bgColor = bgColor
