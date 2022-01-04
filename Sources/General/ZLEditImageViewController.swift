@@ -293,6 +293,10 @@ public class ZLEditImageViewController: UIViewController {
         let teStic = editModel?.textStickers ?? []
         let imStic = editModel?.imageStickers ?? []
         
+        if !teStic.isEmpty {
+            self.isFirstTime = false
+        }
+        
         var stickers: [UIView?] = Array(repeating: nil, count: teStic.count + imStic.count)
         teStic.forEach { (cache) in
             let v = ZLTextStickerView(from: cache.state)
@@ -318,6 +322,16 @@ public class ZLEditImageViewController: UIViewController {
         self.rotationImageView()
         if self.tools.contains(.filter) {
             self.generateFilterImages()
+        }
+    }
+        
+    var isFirstTime = true
+    
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if isFirstTime {
+            isFirstTime = false
+            self.addTextStickersView("text", textColor: .white, bgColor: .clear)
         }
     }
     
@@ -995,6 +1009,13 @@ public class ZLEditImageViewController: UIViewController {
         }
     }
     
+    func showTextContainer() {
+        UIView.animate(withDuration: 0.2) {
+            self.stickersContainer.alpha = 1
+            self.cancelBtn.alpha = 1
+        }
+    }
+    
     func showInputTextVC(_ text: String? = nil, textColor: UIColor? = nil, bgColor: UIColor? = nil, completion: @escaping ( (String, UIColor, UIColor) -> Void )) {
         // Calculate image displayed frame on the screen.
         var r = self.scrollView.convert(self.view.frame, to: self.containerView)
@@ -1009,12 +1030,13 @@ public class ZLEditImageViewController: UIViewController {
         let vc = ZLInputTextViewController(image: bgImage, text: text, textColor: textColor, bgColor: bgColor)
         self.cancelBtn.alpha = 0
         self.stickersContainer.alpha = 0
-        vc.endInput = { (text, textColor, bgColor) in
+        vc.endInput = { [weak self] (text, textColor, bgColor) in
+            self?.showTextContainer()
             completion(text, textColor, bgColor)
-            UIView.animate(withDuration: 0.2) {
-                self.stickersContainer.alpha = 1
-                self.cancelBtn.alpha = 1
-            }
+        }
+        
+        vc.cancelInput = { [weak self] in
+            self?.showTextContainer()
         }
         
         vc.modalPresentationStyle = .overCurrentContext

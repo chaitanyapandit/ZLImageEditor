@@ -47,6 +47,8 @@ class ZLInputTextViewController: UIViewController {
     /// text, textColor, bgColor
     var endInput: ( (String, UIColor, UIColor) -> Void )?
     
+    var cancelInput: ( () -> Void )?
+
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
     }
@@ -153,6 +155,7 @@ class ZLInputTextViewController: UIViewController {
     }
     
     @objc func cancelBtnClick() {
+        self.cancelInput?()
         self.dismiss(animated: true, completion: nil)
     }
     
