@@ -520,7 +520,7 @@ public class ZLEditImageViewController: UIViewController {
         self.topShadowView.addSubview(self.doneBtn)
         
         if tools.contains(.textSticker) {
-            editToolLayout.itemSize = CGSize(width: 30, height: 30)
+            editToolLayout.itemSize = CGSize(width: 25, height: 25)
             editToolLayout.minimumLineSpacing = 25
             editToolLayout.minimumInteritemSpacing = 25
         }
