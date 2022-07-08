@@ -51,6 +51,22 @@ class ZLEditToolCell: UICollectionViewCell {
             case .adjust:
                 icon.image = getImage("zl_adjust")
                 icon.highlightedImage = getImage("zl_adjust_selected")
+            case .undo:
+                icon.contentMode = .scaleAspectFit
+                if #available(iOS 13.0, *) {
+                    icon.image = UIImage(
+                        systemName: "arrow.counterclockwise")
+                    icon.tintColor = .white
+                } else {
+                    icon.image = getImage("zl_revoke_disable")
+                }
+                if #available(iOS 13.0, *) {
+                    icon.highlightedImage = UIImage(
+                        systemName: "arrow.counterclockwise")
+                    icon.tintColor = .white
+                } else {
+                    icon.highlightedImage = getImage("zl_revoke_disable")
+                }
             }
         }
     }

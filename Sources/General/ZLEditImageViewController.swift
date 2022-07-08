@@ -518,6 +518,12 @@ public class ZLEditImageViewController: UIViewController {
         self.doneBtn.layer.masksToBounds = true
         self.topShadowView.addSubview(self.doneBtn)
         
+        if tools.contains(.textSticker) {
+            editToolLayout.itemSize = CGSize(width: 20, height: 20)
+            editToolLayout.minimumLineSpacing = 65
+            editToolLayout.minimumInteritemSpacing = 65
+        }
+        
         if tools.contains(.draw) {
             let drawColorLayout = UICollectionViewFlowLayout()
             let drawColorItemWidth: CGFloat = 30
@@ -752,7 +758,11 @@ public class ZLEditImageViewController: UIViewController {
     }
     
     func textStickerBtnClick() {
+        self.cancelBtn.alpha = 0
+        self.doneBtn.alpha = 0
         showInputTextVC { [weak self] (text, textColor, bgColor) in
+            self?.cancelBtn.alpha = 1
+            self?.doneBtn.alpha = 1
             self?.addTextStickersView(text, textColor: textColor, bgColor: bgColor)
         }
     }
@@ -1415,6 +1425,9 @@ extension ZLEditImageViewController: UICollectionViewDataSource, UICollectionVie
             case .adjust:
                 adjustBtnClick()
                 break
+            case .undo:
+                _ = self.stickersContainer.subviews.compactMap { $0.removeFromSuperview() }
+                break
             }
         } else if collectionView == drawColorCollectionView {
             currentDrawColor = drawColors[indexPath.row]
@@ -1523,8 +1536,14 @@ extension ZLEditImageViewController: ZLTextStickerViewDelegate {
     }
     
     func sticker(_ textSticker: ZLTextStickerView, editText text: String) {
+        self.cancelBtn.alpha = 0
+        self.doneBtn.alpha = 0
         self.showInputTextVC(text, textColor: textSticker.textColor, bgColor: textSticker.bgColor) { [weak self] (text, textColor, bgColor) in
-            guard let `self` = self else { return }
+            guard let `self` = self else {
+                self?.cancelBtn.alpha = 1
+                self?.doneBtn.alpha = 1
+                return
+            }
             if text.isEmpty {
                 textSticker.moveToAshbin()
             } else {
@@ -1538,6 +1557,8 @@ extension ZLEditImageViewController: ZLTextStickerViewDelegate {
                 let newSize = ZLTextStickerView.calculateSize(text: text, width: self.view.frame.width)
                 textSticker.changeSize(to: newSize)
             }
+            self.cancelBtn.alpha = 1
+            self.doneBtn.alpha = 1
         }
     }
     
