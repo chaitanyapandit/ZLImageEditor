@@ -352,11 +352,11 @@ public class ZLEditImageViewController: UIViewController {
         
         self.topShadowView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 150)
         self.topShadowLayer.frame = self.topShadowView.bounds
-        self.cancelBtn.frame = CGRect(x: 16, y: insets.top, width: 60, height: 60)
+        self.cancelBtn.frame = CGRect(x: 15, y: insets.top, width: 60, height: 60)
         
         let doneBtnH = ZLImageEditorLayout.bottomToolBtnH
         let doneBtnW = localLanguageTextValue(.done).boundingRect(font: ZLImageEditorLayout.bottomToolTitleFont, limitSize: CGSize(width: CGFloat.greatestFiniteMagnitude, height: doneBtnH)).width + 20
-        self.doneBtn.frame = CGRect(x: self.view.frame.width-16-doneBtnW, y: insets.top + 15, width: doneBtnW, height: doneBtnH)
+        self.doneBtn.frame = CGRect(x: self.view.frame.width-12-doneBtnW, y: insets.top + 15, width: doneBtnW, height: doneBtnH)
 
         self.bottomShadowView.frame = CGRect(x: 0, y: self.view.frame.height - 140 - insets.bottom, width: self.view.frame.width, height: 140 + insets.bottom)
         self.bottomShadowLayer.frame = self.bottomShadowView.bounds
