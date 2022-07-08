@@ -364,14 +364,14 @@ public class ZLEditImageViewController: UIViewController {
         self.drawColorCollectionView?.frame = CGRect(x: 20, y: 20, width: self.view.frame.width - 80, height: ZLEditImageViewController.drawColViewH)
         self.revokeBtn.frame = CGRect(x: self.view.frame.width - 15 - 35, y: 30, width: 35, height: 30)
         
-        let toolY: CGFloat = 85
+        let toolY: CGFloat = 95
 
         self.adjustCollectionView?.frame = CGRect(x: 20, y: 10, width: view.frame.width - 40, height: ZLEditImageViewController.adjustColViewH)
         self.adjustSlider?.frame = CGRect(x: view.frame.width - 60, y: view.frame.height / 2 - 100, width: 60, height: 200)
         
         self.filterCollectionView?.frame = CGRect(x: 20, y: 0, width: self.view.frame.width - 40, height: ZLEditImageViewController.filterColViewH)
                 
-        self.editToolCollectionView.frame = CGRect(x: 20, y: toolY, width: self.view.bounds.width - 20 - 20 - doneBtnW - 20, height: 30)
+        self.editToolCollectionView.frame = CGRect(x: 65, y: toolY, width: self.view.bounds.width - 60, height: 30)
         
         if !self.drawPaths.isEmpty {
             self.drawLine()
@@ -520,8 +520,8 @@ public class ZLEditImageViewController: UIViewController {
         
         if tools.contains(.textSticker) {
             editToolLayout.itemSize = CGSize(width: 20, height: 20)
-            editToolLayout.minimumLineSpacing = 65
-            editToolLayout.minimumInteritemSpacing = 65
+            editToolLayout.minimumLineSpacing = 15
+            editToolLayout.minimumInteritemSpacing = 15
         }
         
         if tools.contains(.draw) {
