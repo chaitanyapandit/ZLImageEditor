@@ -371,7 +371,8 @@ public class ZLEditImageViewController: UIViewController {
         
         self.filterCollectionView?.frame = CGRect(x: 20, y: 0, width: self.view.frame.width - 40, height: ZLEditImageViewController.filterColViewH)
                 
-        self.editToolCollectionView.frame = CGRect(x: 65, y: toolY, width: self.view.bounds.width - 60, height: 30)
+        let x = (self.view.frame.width / 2) - ((16 * 2) + (80))
+        self.editToolCollectionView.frame = CGRect(x: x, y: toolY, width: self.view.bounds.width - 60, height: 30)
         
         if !self.drawPaths.isEmpty {
             self.drawLine()
