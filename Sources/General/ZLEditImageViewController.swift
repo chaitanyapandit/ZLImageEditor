@@ -1021,6 +1021,7 @@ public class ZLEditImageViewController: UIViewController {
         UIView.animate(withDuration: 0.2) {
             self.stickersContainer.alpha = 1
             self.cancelBtn.alpha = 1
+            self.doneBtn.alpha = 1
         }
     }
     
