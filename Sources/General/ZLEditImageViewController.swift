@@ -371,7 +371,7 @@ public class ZLEditImageViewController: UIViewController {
         
         self.filterCollectionView?.frame = CGRect(x: 20, y: 0, width: self.view.frame.width - 40, height: ZLEditImageViewController.filterColViewH)
                 
-        let x = (self.view.frame.width / 2) - ((16 * 2) + (80))
+        let x = (self.view.frame.width / 2) - ((16 * 2) + (82))
         self.editToolCollectionView.frame = CGRect(x: x, y: toolY, width: self.view.bounds.width - 60, height: 30)
         
         if !self.drawPaths.isEmpty {
@@ -521,8 +521,8 @@ public class ZLEditImageViewController: UIViewController {
         
         if tools.contains(.textSticker) {
             editToolLayout.itemSize = CGSize(width: 20, height: 20)
-            editToolLayout.minimumLineSpacing = 15
-            editToolLayout.minimumInteritemSpacing = 15
+            editToolLayout.minimumLineSpacing = 25
+            editToolLayout.minimumInteritemSpacing = 25
         }
         
         if tools.contains(.draw) {
